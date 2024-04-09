@@ -5,7 +5,7 @@ RO_app is a python program which lets the user generate "run times" for climbing
 RO_app.exe can be downloaded from my GitHub. 
 
 ## Usage
-![tempsnip.png](attachment:tempsnip.png)
+![TempSnip](tempsnip.png)
 
 ### Competition Start Time
 This box accepts military time in the HH:MM Time format. This time determines when the first climber will being climbing.
