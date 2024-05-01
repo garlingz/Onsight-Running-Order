@@ -5,7 +5,7 @@ RO_app is a python program which lets the user generate "run times" for climbing
 Contact me for download link. 
 
 ## Usage
-![TempSnip](tempsnip.png)
+![new_window](new_window.png)
 
 ### Competition Start Time
 This box accepts military time in the HH:MM Time format. This time determines when the first climber will being climbing.
@@ -22,12 +22,29 @@ How many boulders will each competitor go through in their round.
 ### List of Competitors
 List out Competitor names seperated by a new line. Each competitor in the list will be assigned a chair time, a start time, and an end time.
 
+### Randomize
+Shuffles the order of competitiors provided in the Competitor List.
+
 ### Clear
 The clear button will delete the entries in **Competition Start Time**, **Time per Boulder** and **List of Competitors**. It will retain the information in **Transition Time** and **Boulders in the Round**.
 
 ### Submit
 Using the information entered, the program will open a new window showing a **Chair Time**, **Start Time** and **End Time**.
 
+
+![second_window](new_secondwindow.PNG)
+
+### Copy to Clipboard
+Copies all text in the field to the clipboard.
+
+### Save as CSV File
+Create a Comma Seperated Values file containing the information in the text field. This format is accepted by Excel/Sheets.
+
+### Copy CSV to Clipboard
+Copies the text field to the clipboard in the CSV format. This format can be pasted in Excel/Sheets.
+
+### Create Timer
+Opens the default browser to www.intervaltimer.com to create an interval timer. This site is often used by USA Climbing timer.
 
 # **<u>Project Goals</u>**
 * Learn Object Oriented Programming by using Classes and Functions for project - Didn't do very well.
@@ -44,6 +61,6 @@ Using the information entered, the program will open a new window showing a **Ch
     * Display start times for each competitor &#x2705;
     * Display start time for each boulder per competitor
     * Toggle to show what time competitor needs to be sitting in chair (1 round before their climb) &#x2705;
-    * Be able to randomize order of competitors
+    * Be able to randomize order of competitors &#x2705;
     * Columns for each climber:
         * Name, Chair Time, Boulder 1 Start, <s>Boulder 2 Start, Boulder 3 Start, Boulder 4 Start </s>, End Climbing &#x2705;

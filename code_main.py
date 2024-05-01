@@ -1,12 +1,12 @@
-#Imports
 import pandas as pd
-import numpy as np
 import tkinter as tk
 from datetime import datetime
 from tkinter import messagebox
 from tkinter import filedialog
 import io
 import pyperclip
+import webbrowser
+import random
 
 #Main Codeblock for Application
 #Competitor Class
@@ -176,6 +176,19 @@ def clear_button():
     ntry_compstart_time.delete(0, 'end')
     ntry_roundlength.delete(0, 'end')
     txt_competlist.delete('1.0', 'end')
+
+def random_button():
+    names_fromtext = txt_competlist.get('1.0', 'end').strip()
+    names_list = names_fromtext.split('\n')
+    random.shuffle(names_list)
+    
+    txt_competlist.delete('1.0', 'end')
+    for name in names_list:
+        txt_competlist.insert('end', name + '\n')
+
+def open_browser():
+    url = 'https://www.intervaltimer.com/create/hiit-timer'
+    webbrowser.open(url)
     
 #Functions for opening new windows, for printed info and CSV info
 def open_printed_window():
@@ -201,6 +214,9 @@ def open_printed_window():
 
     btn_printedinfo_save = tk.Button(fme_printedinfo_btns, text= 'Copy CSV to clipboard', command= copy_csv)
     btn_printedinfo_save.grid(row= 0, column= 2, padx= 5)
+
+    btn_openbrowser = tk.Button(fme_printedinfo_btns, text= 'Create Timer\n(in browser)', command= open_browser)
+    btn_openbrowser.grid(row= 1, column= 1)
 
     fme_printedinfo.rowconfigure(0, weight= 1)
     fme_printedinfo.columnconfigure(0, weight= 1)
@@ -270,5 +286,8 @@ btn_clear.grid(row= 0, column= 0, padx=5, pady=20)
 
 btn_enter = tk.Button(fme_buttons, text= 'Submit', command= lambda: [open_printed_window(), get_info()])
 btn_enter.grid(row= 0, column= 1, padx=5, pady=20)
+
+btn_randomize = tk.Button(fme_competitors, text= 'Randomize Competitors', command= random_button)
+btn_randomize.grid(row= 1, column= 1, padx= 0, pady= 5)
 
 window.mainloop()
