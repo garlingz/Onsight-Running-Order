@@ -44,7 +44,7 @@ Create a Comma Seperated Values file containing the information in the text fiel
 Copies the text field to the clipboard in the CSV format. This format can be pasted in Excel/Sheets.
 
 ### Create Timer
-Opens the default browser to www.intervaltimer.com to create an interval timer. This site is often used by USA Climbing timer.
+Opens the default browser to www.intervaltimer.com to create an interval timer. This site is linked on USA Climbing's website.
 
 # **<u>Project Goals</u>**
 * Learn Object Oriented Programming by using Classes and Functions for project...
