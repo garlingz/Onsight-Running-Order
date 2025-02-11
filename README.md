@@ -2,7 +2,7 @@
 RO_app is a python program which lets the user generate "run times" for climbing competitions, specifically on-sight bouldering competitions.
 
 ## Installation
-File hosted by Git-LFS and should be downloadable from GitHub or by GoogleDrive on request.
+~~File hosted by Git-LFS and should be downloadable from GitHub or~~ by GoogleDrive on request.
 
 ## Usage
 ![new_window](new_window.PNG)
