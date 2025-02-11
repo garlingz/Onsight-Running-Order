@@ -44,14 +44,16 @@ Create a Comma Seperated Values file containing the information in the text fiel
 Opens a standalone timer based on user input from the first window.
 ![timer_window](new_timerwindow.png)
 
-#### Start/Resume
+### Start/Resume
 Starts the timer or resumes the timer when paused.
 
-#### Stop
+### Stop
 Pauses the timer at current time. The timer can be reset or resumed when in the paused state.
 
-#### Reset
+### Reset
 Resets the timer to the original values for both the climbing time and transition time.
+
+
 
 # **<u>Project Goals</u>**
 * Learn Object Oriented Programming by using Classes and Functions for project...
@@ -59,8 +61,8 @@ Resets the timer to the original values for both the climbing time and transitio
 * Be able to present project to BP. &#x2705;
 * Program should be able to:
     * Have a changeable Start time. &#x2705;
-    * Have changable round length (default 4 minutes) &#x2705;
-    * Changable transition time (default 15 seconds) &#x2705;
+    * Have changable round length &#x2705;
+    * Changable transition time (default 5 seconds) &#x2705;
     * Be able to insert break times inbetween categories &#x2705; (manually)
     * <s>Autopopulate categories based on age groups</s>
     * <s>Able to customize age groups, default to USAC </s>
@@ -71,3 +73,9 @@ Resets the timer to the original values for both the climbing time and transitio
     * Be able to randomize order of competitors &#x2705;
     * Columns for each climber:
         * Name, Chair Time, Boulder 1 Start, <s>Boulder 2 Start, Boulder 3 Start, Boulder 4 Start </s>, End Climbing &#x2705;
+
+**<u>Next Update</u>**
+* User interface overhall. Making things more user friendly and pleasant to look at.
+* Add functionality to run the TimerApp without using it for a climbing round timer (removed transition sounds).
+* Package program to include all dependencies (like the mp3 sound files)
+* Pick from a dropdown list which types of notification sounds to use for TimerApp audio.
