@@ -79,3 +79,4 @@ Resets the timer to the original values for both the climbing time and transitio
 * Add functionality to run the TimerApp without using it for a climbing round timer (removed transition sounds).
 * Package program to include all dependencies (like the mp3 sound files)
 * Pick from a dropdown list which types of notification sounds to use for TimerApp audio.
+* Host new application on Git LFS.
