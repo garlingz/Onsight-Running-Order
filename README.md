@@ -2,7 +2,7 @@
 RO_app is a python program which lets the user generate "run times" for climbing competitions, specifically on-sight bouldering competitions.
 
 ## Installation
-File hosted by Git-LFS and should be downloadable from GitHub. 
+File hosted by Git-LFS and should be downloadable from GitHub or by GoogleDrive on request.
 
 ## Usage
 ![new_window](new_window.PNG)
@@ -40,11 +40,18 @@ Copies all text in the field to the clipboard.
 ### Save as CSV File
 Create a Comma Seperated Values file containing the information in the text field. This format is accepted by Excel/Sheets.
 
-### Copy CSV to Clipboard
-Copies the text field to the clipboard in the CSV format. This format can be pasted in Excel/Sheets.
-
 ### Create Timer
-Opens the default browser to www.intervaltimer.com to create an interval timer. This site is linked on USA Climbing's website.
+Opens a standalone timer based on user input from the first window.
+![timer_window](new_timerwindow.png)
+
+#### Start/Resume
+Starts the timer or resumes the timer when paused.
+
+#### Stop
+Pauses the timer at current time. The timer can be reset or resumed when in the paused state.
+
+#### Reset
+Resets the timer to the original values for both the climbing time and transition time.
 
 # **<u>Project Goals</u>**
 * Learn Object Oriented Programming by using Classes and Functions for project...
