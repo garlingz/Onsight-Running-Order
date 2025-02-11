@@ -1,1 +1,2 @@
 RO_app.exe filter=lfs diff=lfs merge=lfs -text
+ZipFolder.rar filter=lfs diff=lfs merge=lfs -text
