@@ -80,5 +80,5 @@ Resets the timer to the original values for both the climbing time and transitio
 * Package program to include all dependencies (like the mp3 sound files)
 * Pick from a dropdown list which types of notification sounds to use for TimerApp audio.
 * Host new application on Git LFS.
-* ~~Match color scheme to what USA climbing uses.~~ &#x2705;
-* Match sounds to what USA climbing uses.
+* Match color scheme to what USA climbing uses. &#x2705;
+* Match sounds to what USA climbing uses. &#x2705;
