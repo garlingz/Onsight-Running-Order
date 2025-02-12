@@ -74,9 +74,11 @@ Resets the timer to the original values for both the climbing time and transitio
     * Columns for each climber:
         * Name, Chair Time, Boulder 1 Start, <s>Boulder 2 Start, Boulder 3 Start, Boulder 4 Start </s>, End Climbing &#x2705;
 
-# **<u>Next Update</u>**
+# **<u>To-Do</u>**
 * User interface overhall. Making things more user friendly and pleasant to look at.
 * Add functionality to run the TimerApp without using it for a climbing round timer (removed transition sounds).
 * Package program to include all dependencies (like the mp3 sound files)
 * Pick from a dropdown list which types of notification sounds to use for TimerApp audio.
 * Host new application on Git LFS.
+* Match color scheme to what USA climbing uses.
+* Match sounds to what USA climbing uses.
