@@ -79,6 +79,6 @@ Resets the timer to the original values for both the climbing time and transitio
 * Add functionality to run the TimerApp without using it for a climbing round timer (removed transition sounds).
 * Package program to include all dependencies (like the mp3 sound files)
 * Pick from a dropdown list which types of notification sounds to use for TimerApp audio.
-* Host new application on Git LFS.
+* Host new application on Git LFS. &#x2705;
 * Match color scheme to what USA climbing uses. &#x2705;
 * Match sounds to what USA climbing uses. &#x2705;

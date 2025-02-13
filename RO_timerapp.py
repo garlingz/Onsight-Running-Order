@@ -1,3 +1,4 @@
+# Current Build 2/11/2025
 import csv
 import tkinter as tk
 from datetime import datetime
@@ -63,8 +64,8 @@ def display_results():
     if txt_printedinfo:
         txt_printedinfo.delete("1.0", tk.END)
         for row in results:
-            txt_printedinfo.insert(tk.END, f"{row['Climber']} - Next up: {row['Next Up']}, "
-                                           f"Starts: {row['Start Climbing']}, Ends: {row['End Climbing']}\n")
+            txt_printedinfo.insert(tk.END, f"{row['Climber']} - Chair Time: {row['Next Up']}, "
+                                           f"Climb Time: {row['Start Climbing']}, Ends: {row['End Climbing']}\n")
 
 #Popup Messages
 class PopupMessage:
@@ -76,39 +77,36 @@ class PopupMessage:
     def success(message):
         messagebox.showinfo("Success", message)
 
-    @staticmethod
-    def starttime_error():
-        messagebox.showinfo("Time Error", "Please use military time format\nfor time entries\nExample: 13:45")
-
-    @staticmethod
-    def boulderlength_error():
-        messagebox.showinfo("Time Error", "Please use MM:SS format\nExample: 4:15 = 4 minutes 15 seconds")
-
-    @staticmethod
-    def complist_error():
-        messagebox.showinfo("List Error", "Please provide at least one competitor\nin the List of Competitors field")
-
-    @staticmethod
-    def sucess_copy():
-        messagebox.showinfo('Sucess', 'Text copied to clipboard!')
-    
-    @staticmethod
-    def fail_copy():
-        messagebox.showinfo('Warning', 'There was an error and text did not copy')
-
 #Functions to gather information from the user      
 def get_info():
-    """Gathering all fields before processing information"""
+    """Gathering all fields before processing information. Also handles error checking."""
     start_time = convert_starttime()
     boulder_length = get_boulderlength()
+    if boulder_length is None:
+        return
+    if boulder_length < 10:
+        PopupMessage.show_error("Time Error", "Boulder lengh must be at least 10 seconds")
+        return
+    
     transition_time = get_transtime()
+    if transition_time < 5:
+        PopupMessage.show_error("Time Error", "Transition time must be at least 5 seconds")
+        return
+    
     num_boulders = get_numofboulders()
+    if num_boulders <= 0:
+        PopupMessage.show_error("Number of Boulders Error", "Number of boulders must be at least 1")
+        return
+    
     competitors = get_names()
-
-    # Check if any function raises an error
-    if start_time is None or boulder_length == 0 or transition_time == 0 or num_boulders == 0 or not competitors:
+    if not competitors:
+        PopupMessage.show_error("List Error", "Please provide at least one competitor")
         return
 
+    # Check if any function raises an error
+    if start_time is None or boulder_length <= 5 or transition_time < 5 or num_boulders == 0 or not competitors:
+        return
+    
     category = Category()
     for competitor in competitors:
         category.add_competitor(competitor)
@@ -128,7 +126,7 @@ def convert_starttime():
         #print(f'{hour} hours {minute} minutes, is equal to {convert_seconds} seconds')
         return convert_seconds
     except ValueError:
-        PopupMessage.starttime_error()
+        PopupMessage.show_error("Time Error", "Please use military time format\nfor time entries\nExample: 13:45")
         return None
 
 def get_boulderlength():
@@ -139,8 +137,8 @@ def get_boulderlength():
         converted_seconds = int(timeto_seconds(0, minutes, seconds))
         return converted_seconds
     except ValueError:
-        PopupMessage.boulderlength_error()
-        return 0
+        PopupMessage.show_error("Time Error", "Please use MM:SS format\nExample: 4:15 = 4 minutes 15 seconds")
+        return None
 
 def get_transtime():
     """Retrieves the transition time between boulders"""
@@ -154,9 +152,6 @@ def get_names():
     """Retrieve text from the Competitorlist text box"""
     names = txt_competlist.get('1.0', 'end').strip().split("\n")
     names = [name.strip() for name in names if name.strip()]
-    if not names:
-        PopupMessage.show_error("List error", "Please provide at least one competitor")
-        return None # If no names are provided, return None
     return [Competitor(name) for name in names]
     
 #Button functions for the new window
@@ -167,9 +162,9 @@ def copy_to_clipboard():
         for row in results:
             text_to_copy += f"{row['Climber']} - Next: {row['Next Up']}, Start: {row['Start Climbing']}, End: {row['End Climbing']}\n"
         pyperclip.copy(text_to_copy)
-        PopupMessage.sucess_copy()
+        PopupMessage.success('Text was coppied to clipboard!')
     else:
-        PopupMessage.fail_copy()
+        PopupMessage.show_error('Warning', 'There was an error and text did not copy')
 
 
 def saveas_csv():
@@ -184,7 +179,7 @@ def saveas_csv():
 def clear_button():
     """Clears entry widgets"""
     ntry_compstart_time.delete(0, 'end')
-    ntry_roundlength.delete(0, 'end')
+    #ntry_roundlength.delete(0, 'end') # Testing removing this feature, since it's likely to be a constant
     txt_competlist.delete('1.0', 'end')
 
 def random_button():
@@ -285,24 +280,32 @@ class TimerApp:
 
         # Play a beep at 1:00
         if self.is_high_intensity and self.time_left == 60:
-            mixer.music.load("beep.mp3")
+            mixer.music.load("440_short.mp3")
             mixer.music.play()
 
-        # Change background color based on Phase
-        if self.is_high_intensity:
-            self.root.configure(bg="red")
-            self.label.config(bg="red")
+        # Change background color based on conditions. Should reflect USA Climbing's color scheme
+        if self.is_high_intensity and self.time_left > 60:
+            self.root.configure(bg="black")
+            self.label.config(bg="black", fg= "white")
+        elif self.is_high_intensity and self.time_left <= 60: 
+            self.root.configure(bg="black")
+            self.label.config(bg="black", fg= "red")
+        elif not self.is_high_intensity:
+            self.root.configure(bg="black")
+            self.label.config(bg="black", fg= "green")
         else:
-            self.root.configure(bg="green")
-            self.label.config(bg="green")
+            PopupMessage.show_error("Error", "There was an error with the timer")
 
-        if self.time_left >= 0:
+        if self.time_left <= 5:
+            self.short_beeps()
+
+        if self.time_left > 0:
             self.time_left -= 1
             self.root.after(1000, self.update_timer)
         else:
             # play transition sound
             self.play_transition_mp3()
-            
+
             # Switch intensity
             self.is_high_intensity = not self.is_high_intensity
             self.time_left = int(HIGH_INTENSITY_DURATION if self.is_high_intensity else LOW_INTENSITY_DURATION)
@@ -316,10 +319,16 @@ class TimerApp:
     def play_transition_mp3(self):
         """Plays the transition sound at the start of the transition timer and the start of climbing"""
         if self.is_high_intensity:  #plays when switching FROM high intensity
-            mixer.music.load("TTS_transition.mp3")
+            mixer.music.load("1000_long.mp3")
         else:                       #plays when switching FROM low intensity
-            mixer.music.load("TTS_begin_climbing.mp3")
+            mixer.music.load("short_long.mp3")
         mixer.music.play()
+    
+    def short_beeps(self):
+        """Plays the short beeps each second from 5 seconds remaining"""
+        if self.is_high_intensity and self.time_left <= 5:
+            mixer.music.load("440_short.mp3")
+            mixer.music.play()
 
     def resize_text(self, event):
         """Dynamically change text size"""
