@@ -26,10 +26,13 @@ List out Competitor names seperated by a new line. Each competitor in the list w
 Shuffles the order of competitiors provided in the Competitor List.
 
 ### Clear
-The clear button will delete the entries in **Competition Start Time**, **Time per Boulder** and **List of Competitors**. It will retain the information in **Transition Time** and **Boulders in the Round**.
+The clear button will delete the entries in **Competition Start Time**, **Time per Boulder** and **List of Competitors**. It will retain the information in **Transition Time** and **Boulders in the Round**, which can be edited if needed.
 
 ### Submit
-Using the information entered, the program will open a new window showing a **Chair Time**, **Start Time** and **End Time**.
+Using the information entered, the program will open a new window showing a **Chair Time**, **Start Time** and **End Time** as well as a few other buttons.
+
+### Create Timer
+Opens the **TimerApp** using **Time per Boulder** and **Transition Time**. This is a shortcut, but runs the same timer as the one found in the *Second Window*.
 
 
 ![second_window](new_secondwindow.PNG)
@@ -41,6 +44,7 @@ Copies all text in the field to the clipboard.
 Create a Comma Seperated Values file containing the information in the text field. This format is accepted by Excel/Sheets.
 
 ### Create Timer
+**TimerApp**
 Opens a standalone timer based on user input from the first window.
 ![timer_window](new_timerwindow.png)
 
