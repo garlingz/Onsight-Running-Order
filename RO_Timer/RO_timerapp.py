@@ -178,9 +178,9 @@ def copy_to_clipboard():
         pyperclip.copy(text_to_copy)
         PopupMessage.success('Text was coppied to clipboard!')
     else:
-        PopupMessage.show_error('Warning', 'There was an error and text did not copy')
+        PopupMessage.show_error('Warning', 'There was an error and text did not copy') 
 
-#Popup Messages
+# UI Management
 class PopupMessage:
     @staticmethod
     def show_error(title, message):
@@ -188,9 +188,8 @@ class PopupMessage:
 
     @staticmethod
     def success(message):
-        messagebox.showinfo("Success", message)   
+        messagebox.showinfo("Success", message)
 
-# UI Management
 def open_printed_window():
     """Opens a new window to display the printed information. Now only triggers in the get_info() function"""
     global txt_printedinfo
