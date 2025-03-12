@@ -1,4 +1,4 @@
-# Current Build 2/11/2025
+# Current Build 3/12/2025
 import csv
 import tkinter as tk
 from datetime import datetime
@@ -7,7 +7,7 @@ from tkinter import filedialog
 import pyperclip
 from random import shuffle
 from pygame import mixer
-#Full code including previous RO_app now with TimerApp class
+
 class Competitor:
     def __init__(self, name):
         self.name = name
@@ -23,7 +23,7 @@ class Category:
 # global variables
 results = []
 
-#Creating global functions to convert to and from a Seconds based timescale.
+# Time Conversions and Data Processing Functions
 def secondsto_time(input_seconds):
     """Converts seconds into a normal display of time"""
     hours = input_seconds // 3600
@@ -34,86 +34,6 @@ def secondsto_time(input_seconds):
 def timeto_seconds(hour = 0, minute = 0, second = 0):
     """Converts Normal display of time into seconds"""
     return (hour * 3600) + (minute * 60) + second
-
-#Generating the times for each climber
-def generate_startend_times(category):
-    """Generates and stores the start and end times for each climber in the category"""
-    global results
-    results.clear()
-    current_time = convert_starttime()
-    round_length = get_boulderlength()
-    transition_length = get_transtime()
-    boulders_per_round = get_numofboulders()
-    single_round = round_length + transition_length
-    for climber in category.competitors:
-        end_time = current_time + (single_round * ((boulders_per_round * 2) + 1) - transition_length) #Now accounts for variable boulders in round
-        chairtime = current_time - single_round
-        #Add row to Dictionary
-        results.append({
-            "Climber": climber.name,
-            "Next Up": secondsto_time(chairtime),
-            "Start Climbing": secondsto_time(current_time),
-            "End Climbing": secondsto_time(end_time)
-        })              
-
-        current_time += (round_length + transition_length)
-    display_results()
-
-def display_results():
-    """Displays results in the text box."""
-    if txt_printedinfo:
-        txt_printedinfo.delete("1.0", tk.END)
-        for row in results:
-            txt_printedinfo.insert(tk.END, f"{row['Climber']} - Chair Time: {row['Next Up']}, "
-                                           f"Climb Time: {row['Start Climbing']}, Ends: {row['End Climbing']}\n")
-
-#Popup Messages
-class PopupMessage:
-    @staticmethod
-    def show_error(title, message):
-        messagebox.showinfo(title, message)
-
-    @staticmethod
-    def success(message):
-        messagebox.showinfo("Success", message)
-
-#Functions to gather information from the user      
-def get_info():
-    """Gathering all fields before processing information. Also handles error checking."""
-    start_time = convert_starttime()
-    boulder_length = get_boulderlength()
-    if boulder_length is None:
-        return
-    if boulder_length < 10:
-        PopupMessage.show_error("Time Error", "Boulder lengh must be at least 10 seconds")
-        return
-    
-    transition_time = get_transtime()
-    if transition_time < 5:
-        PopupMessage.show_error("Time Error", "Transition time must be at least 5 seconds")
-        return
-    
-    num_boulders = get_numofboulders()
-    if num_boulders <= 0:
-        PopupMessage.show_error("Number of Boulders Error", "Number of boulders must be at least 1")
-        return
-    
-    competitors = get_names()
-    if not competitors:
-        PopupMessage.show_error("List Error", "Please provide at least one competitor")
-        return
-
-    # Check if any function raises an error
-    if start_time is None or boulder_length <= 5 or transition_time < 5 or num_boulders == 0 or not competitors:
-        return
-    
-    category = Category()
-    for competitor in competitors:
-        category.add_competitor(competitor)
-
-    open_printed_window()
-    generate_startend_times(category)
-    set_timer_durations()
 
 def convert_starttime():
     """Converts the start time to seconds"""
@@ -153,20 +73,77 @@ def get_names():
     names = txt_competlist.get('1.0', 'end').strip().split("\n")
     names = [name.strip() for name in names if name.strip()]
     return [Competitor(name) for name in names]
-    
-#Button functions for the new window
-def copy_to_clipboard():
-    """Copies text to the clipboard"""
-    if results:
-        text_to_copy = ""
+
+# Competition Logic
+def display_results():
+    """Displays results in the text box."""
+    if txt_printedinfo:
+        txt_printedinfo.delete("1.0", tk.END)
         for row in results:
-            text_to_copy += f"{row['Climber']} - Next: {row['Next Up']}, Start: {row['Start Climbing']}, End: {row['End Climbing']}\n"
-        pyperclip.copy(text_to_copy)
-        PopupMessage.success('Text was coppied to clipboard!')
-    else:
-        PopupMessage.show_error('Warning', 'There was an error and text did not copy')
+            txt_printedinfo.insert(tk.END, f"{row['Climber']} - Chair Time: {row['Next Up']}, "
+                                           f"Climb Time: {row['Start Climbing']}, Ends: {row['End Climbing']}\n")
 
+def generate_startend_times(category):
+    """Generates and stores the start and end times for each climber in the category"""
+    global results
+    results.clear()
+    current_time = convert_starttime()
+    round_length = get_boulderlength()
+    transition_length = get_transtime()
+    boulders_per_round = get_numofboulders()
+    single_round = round_length + transition_length
+    for climber in category.competitors:
+        end_time = current_time + (single_round * ((boulders_per_round * 2) + 1) - transition_length) #Now accounts for variable boulders in round
+        chairtime = current_time - single_round
+        #Add row to Dictionary
+        results.append({
+            "Climber": climber.name,
+            "Next Up": secondsto_time(chairtime),
+            "Start Climbing": secondsto_time(current_time),
+            "End Climbing": secondsto_time(end_time)
+        })              
 
+        current_time += (round_length + transition_length)
+    display_results()
+
+def get_info():
+    """Gathering all fields before processing information. Also handles error checking."""
+    start_time = convert_starttime()
+    boulder_length = get_boulderlength()
+    if boulder_length is None:
+        return
+    if boulder_length < 10:
+        PopupMessage.show_error("Time Error", "Boulder lengh must be at least 10 seconds")
+        return
+    
+    transition_time = get_transtime()
+    if transition_time < 5:
+        PopupMessage.show_error("Time Error", "Transition time must be at least 5 seconds")
+        return
+    
+    num_boulders = get_numofboulders()
+    if num_boulders <= 0:
+        PopupMessage.show_error("Number of Boulders Error", "Number of boulders must be at least 1")
+        return
+    
+    competitors = get_names()
+    if not competitors:
+        PopupMessage.show_error("List Error", "Please provide at least one competitor")
+        return
+
+    # Check if any function raises an error
+    if start_time is None or boulder_length <= 5 or transition_time < 5 or num_boulders == 0 or not competitors:
+        return
+    
+    category = Category()
+    for competitor in competitors:
+        category.add_competitor(competitor)
+
+    open_printed_window()
+    generate_startend_times(category)
+    set_timer_durations()
+
+# Button/Action Functions
 def saveas_csv():
     """Saves the printed info to a CSV file"""
     file_path = filedialog.asksaveasfilename(defaultextension='.csv', filetypes=[('CSV files', '*.csv')])
@@ -192,16 +169,170 @@ def random_button():
     for name in names_list:
         txt_competlist.insert('end', name + '\n')
 
+def copy_to_clipboard():
+    """Copies text to the clipboard"""
+    if results:
+        text_to_copy = ""
+        for row in results:
+            text_to_copy += f"{row['Climber']} - Next: {row['Next Up']}, Start: {row['Start Climbing']}, End: {row['End Climbing']}\n"
+        pyperclip.copy(text_to_copy)
+        PopupMessage.success('Text was coppied to clipboard!')
+    else:
+        PopupMessage.show_error('Warning', 'There was an error and text did not copy') 
+
+# UI Management
+class PopupMessage:
+    @staticmethod
+    def show_error(title, message):
+        messagebox.showinfo(title, message)
+
+    @staticmethod
+    def success(message):
+        messagebox.showinfo("Success", message)
+
+def open_printed_window():
+    """Opens a new window to display the printed information. Now only triggers in the get_info() function"""
+    global txt_printedinfo
+    printed_window = tk.Toplevel(window)
+    printed_window.title("Running Order Information")
+    printed_window.geometry('800x600')
+    #Add widgets to the window here
+    fme_printedinfo = tk.Frame(master= printed_window, bg= 'lightgrey')
+    fme_printedinfo.pack(expand= True, fill= tk.BOTH, padx= 5, pady= 20)
+
+    txt_printedinfo = tk.Text(master= fme_printedinfo)
+    txt_printedinfo.grid(row= 0, column= 0, padx= 5, pady= 20, sticky= 'nsew')
+
+    fme_printedinfo_btns = tk.Frame(master= fme_printedinfo)
+    fme_printedinfo_btns.grid(row= 1, column= 0, sticky= 'nsew')
+
+    btn_printedinfo_copy = tk.Button(fme_printedinfo_btns, text='Copy to Clipboard', command= copy_to_clipboard)
+    btn_printedinfo_copy.grid(row= 0, column= 0, padx= 5)
+
+    btn_printedinfo_view = tk.Button(fme_printedinfo_btns, text= 'Save as CSV file\n(for exporting to excel/sheets)', command= saveas_csv)
+    btn_printedinfo_view.grid(row= 0, column= 1, padx= 5)
+
+    btn_opentimer = tk.Button(fme_printedinfo_btns, text= 'Create Timer', command= open_timer)
+    btn_opentimer.grid(row= 0, column= 2)
+
+    fme_printedinfo.rowconfigure(0, weight= 1)
+    fme_printedinfo.columnconfigure(0, weight= 1)
+    fme_printedinfo_btns.columnconfigure(0, weight= 1)
+    fme_printedinfo_btns.columnconfigure(1, weight= 1)
+    fme_printedinfo_btns.columnconfigure(2, weight= 1)
+
 def open_timer():
     """Opens a new window containing the TimerApp"""
     timer_window = tk.Toplevel()
     app = TimerApp(timer_window)
+
+def just_timer(): 
+    """Opens the TimerApp without needing to open the Running Order Printed window"""
+    boulder_length = get_boulderlength()
+    if boulder_length is None:
+        return
+    if boulder_length < 10:
+        PopupMessage.show_error("Time Error", "Boulder lengh must be at least 10 seconds")
+        return
     
-mixer.init()    #initialize PyGame
+    transition_time = get_transtime()
+    if transition_time < 5:
+        PopupMessage.show_error("Time Error", "Transition time must be at least 5 seconds")
+        return
+    
+    num_boulders = get_numofboulders()
+    if num_boulders <= 0:
+        PopupMessage.show_error("Number of Boulders Error", "Number of boulders must be at least 1")
+        return
+    set_timer_durations()
+    open_timer()
+
+#Setting up layout for application Main Window
+window = tk.Tk()
+window.title('Running Order Generator')
+
+fme_main = tk.Frame(master= window, width=1000, height= 600, bg= 'lightgrey')
+fme_main.pack(expand= True, fill=tk.BOTH)
+txt_printedinfo = None
+
+fme_timeentry = tk.Frame(master= fme_main, relief= 'ridge', borderwidth= 5, padx= 5, pady= 5)
+fme_timeentry.grid(row=0, column= 0, sticky= 'nsew')
+
+fme_competitors = tk.Frame(master= fme_main, relief= 'ridge', borderwidth= 5, padx= 10, pady= 10)
+fme_competitors.grid(row= 0, column= 2, sticky= 'nsew')
+
+fme_buttons = tk.Frame(master= fme_main, bg= 'lightgrey')
+fme_buttons.grid(row= 2, column= 2)
+
+#Column Weights
+fme_main.grid_columnconfigure(0, weight= 1, minsize= 50)
+fme_main.grid_columnconfigure(1, weight= 2, minsize= 50)
+
+#Start Time Entry
+lbl_compstart_time = tk.Label(master= fme_timeentry, text= 'Competition \n Start Time')
+lbl_compstart_time.grid(row= 0, column= 0, padx=5, pady=20)
+
+ntry_compstart_time = tk.Entry(master= fme_timeentry, width= 15)
+ntry_compstart_time.grid(row= 0, column= 1, padx=5, pady=5)
+
+#Round Length Entry
+lbl_roundlength = tk.Label(master= fme_timeentry, text='Time per Boulder')
+lbl_roundlength.grid(row= 2, column= 0, padx=5, pady=20)
+
+ntry_roundlength = tk.Entry(master=fme_timeentry, width= 10)
+ntry_roundlength.grid(row= 2, column= 1, padx=5, pady=5)
+
+#Transition Time Entry
+lbl_transtime = tk.Label(master= fme_timeentry, text= 'Transition Time \n inbetween boulders \n (seconds)')
+lbl_transtime.grid(row= 3, column= 0, padx=5, pady=20)
+
+spnbx_transtime = tk.Spinbox(master= fme_timeentry, values= tuple(range(5, 65, 5)), width= 15)
+spnbx_transtime.grid(row= 3, column= 1, padx=5, pady=20)
+
+#Number of Boulders Entry
+lbl_numofboulders = tk.Label(master= fme_timeentry, text= 'Boulders in the Round')
+lbl_numofboulders.grid(row= 4, column= 0, padx=5, pady=20)
+
+spnbx_numofboulders = tk.Spinbox(master= fme_timeentry, values= tuple(range(1, 11)), width= 3)
+spnbx_numofboulders.grid(row= 4, column= 1, padx=5, pady=5)
+
+#Main window create timer button
+btn_make_timer = tk.Button(master= fme_timeentry, text= 'Create Timer', command= just_timer)
+btn_make_timer.grid(row= 5, columnspan= 2, padx= 5, pady= 5)
+
+#Competitors Entry
+lbl_competlist = tk.Label(master=fme_competitors, text= 'List of Competitors \n (Seperated by new line)')
+lbl_competlist.grid(row= 0,column= 0, padx= 5, pady= 20)
+
+txt_competlist = tk.Text(master= fme_competitors, width= 20, height= 20)
+txt_competlist.grid(row= 0, column= 1)
+
+#Buttons
+btn_clear = tk.Button(fme_buttons, text= 'CLEAR', bg= 'red', fg= 'white', command= clear_button)
+btn_clear.grid(row= 0, column= 0, padx=5, pady=20)
+
+btn_randomize = tk.Button(fme_competitors, text= 'Randomize Competitors', command= random_button)
+btn_randomize.grid(row= 1, column= 1, padx= 0, pady= 5)
+
+btn_enter = tk.Button(fme_buttons, text= 'Submit', command= lambda: [get_info()])
+btn_enter.grid(row= 0, column= 1, padx=5, pady=20)
+
+def set_timer_durations():
+    """Sets the timer durations based on user input."""
+    global HIGH_INTENSITY_DURATION, LOW_INTENSITY_DURATION
+    boulder_time = get_boulderlength()
+    transition_time = int(spnbx_transtime.get())
+    HIGH_INTENSITY_DURATION = boulder_time  # seconds
+    LOW_INTENSITY_DURATION = transition_time  # seconds
+
 class TimerApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Climbing Timer")
+
+        # Initialize mixer if not already running
+        if not mixer.get_init():
+            mixer.init()
 
         # Start in normal window mode
         self.root.geometry("500x300")  # Ensures it starts in a normal-sized window
@@ -277,7 +408,6 @@ class TimerApp:
         self.time_left = int(self.time_left)
         minutes, seconds = divmod(self.time_left, 60)
         self.label.config(text=f"{minutes:02}:{seconds:02}")
-
         # Play a beep at 1:00
         if self.is_high_intensity and self.time_left == 60:
             mixer.music.load("440_short.mp3")
@@ -344,109 +474,5 @@ class TimerApp:
         """Exits full-screen mode."""
         self.fullscreen = False
         self.root.attributes("-fullscreen", False)
-
-def open_printed_window():
-    """Opens a new window to display the printed information. Now only triggers in the get_info() function"""
-    global txt_printedinfo
-    printed_window = tk.Toplevel(window)
-    printed_window.title("Running Order Information")
-    printed_window.geometry('800x600')
-    #Add widgets to the window here
-    fme_printedinfo = tk.Frame(master= printed_window, bg= 'lightgrey')
-    fme_printedinfo.pack(expand= True, fill= tk.BOTH, padx= 5, pady= 20)
-
-    txt_printedinfo = tk.Text(master= fme_printedinfo)
-    txt_printedinfo.grid(row= 0, column= 0, padx= 5, pady= 20, sticky= 'nsew')
-
-    fme_printedinfo_btns = tk.Frame(master= fme_printedinfo)
-    fme_printedinfo_btns.grid(row= 1, column= 0, sticky= 'nsew')
-
-    btn_printedinfo_copy = tk.Button(fme_printedinfo_btns, text='Copy to Clipboard', command= copy_to_clipboard)
-    btn_printedinfo_copy.grid(row= 0, column= 0, padx= 5)
-
-    btn_printedinfo_view = tk.Button(fme_printedinfo_btns, text= 'Save as CSV file\n(for exporting to excel/sheets)', command= saveas_csv)
-    btn_printedinfo_view.grid(row= 0, column= 1, padx= 5)
-
-    btn_opentimer = tk.Button(fme_printedinfo_btns, text= 'Create Timer', command= open_timer)
-    btn_opentimer.grid(row= 0, column= 2)
-
-    fme_printedinfo.rowconfigure(0, weight= 1)
-    fme_printedinfo.columnconfigure(0, weight= 1)
-    fme_printedinfo_btns.columnconfigure(0, weight= 1)
-    fme_printedinfo_btns.columnconfigure(1, weight= 1)
-    fme_printedinfo_btns.columnconfigure(2, weight= 1)
-
-#Setting up layout for application Main Window
-window = tk.Tk()
-window.title('Running Order Generator')
-
-fme_main = tk.Frame(master= window, width=1000, height= 600, bg= 'lightgrey')
-fme_main.pack(expand= True, fill=tk.BOTH)
-txt_printedinfo = None
-
-fme_timeentry = tk.Frame(master= fme_main, relief= 'ridge', borderwidth= 5, padx= 5, pady= 5)
-fme_timeentry.grid(row=0, column= 0, sticky= 'nsew')
-
-fme_competitors = tk.Frame(master= fme_main, relief= 'ridge', borderwidth= 5, padx= 10, pady= 10)
-fme_competitors.grid(row= 0, column= 2, sticky= 'nsew')
-
-fme_buttons = tk.Frame(master= fme_main, bg= 'lightgrey')
-fme_buttons.grid(row= 2, column= 2)
-
-#Column Weights
-fme_main.grid_columnconfigure(0, weight= 1, minsize= 50)
-fme_main.grid_columnconfigure(1, weight= 2, minsize= 50)
-
-#Start Time Entry
-lbl_compstart_time = tk.Label(master= fme_timeentry, text= 'Competition \n Start Time')
-lbl_compstart_time.grid(row= 0, column= 0, padx=5, pady=20)
-
-ntry_compstart_time = tk.Entry(master= fme_timeentry, width= 15)
-ntry_compstart_time.grid(row= 0, column= 1, padx=5, pady=5)
-
-#Round Length Entry
-lbl_roundlength = tk.Label(master= fme_timeentry, text='Time per Boulder')
-lbl_roundlength.grid(row= 2, column= 0, padx=5, pady=20)
-
-ntry_roundlength = tk.Entry(master=fme_timeentry, width= 10)
-ntry_roundlength.grid(row= 2, column= 1, padx=5, pady=5)
-
-#Transition Time Entry
-lbl_transtime = tk.Label(master= fme_timeentry, text= 'Transition Time \n inbetween boulders \n (seconds)')
-lbl_transtime.grid(row= 3, column= 0, padx=5, pady=20)
-
-spnbx_transtime = tk.Spinbox(master= fme_timeentry, values= tuple(range(5, 65, 5)), width= 15)
-spnbx_transtime.grid(row= 3, column= 1, padx=5, pady=20)
-
-#Number of Boulders Entry
-lbl_numofboulders = tk.Label(master= fme_timeentry, text= 'Boulders in the Round')
-lbl_numofboulders.grid(row= 4, column= 0, padx=5, pady=20)
-
-spnbx_numofboulders = tk.Spinbox(master= fme_timeentry, values= tuple(range(1, 11)), width= 3)
-spnbx_numofboulders.grid(row= 4, column= 1, padx=5, pady=5)
-
-#Competitors Entry
-lbl_competlist = tk.Label(master=fme_competitors, text= 'List of Competitors \n (Seperated by new line)')
-lbl_competlist.grid(row= 0,column= 0, padx= 5, pady= 20)
-
-txt_competlist = tk.Text(master= fme_competitors, width= 20, height= 20)
-txt_competlist.grid(row= 0, column= 1)
-
-#Buttons
-btn_clear = tk.Button(fme_buttons, text= 'CLEAR', bg= 'red', fg= 'white', command= clear_button)
-btn_clear.grid(row= 0, column= 0, padx=5, pady=20)
-
-btn_randomize = tk.Button(fme_competitors, text= 'Randomize Competitors', command= random_button)
-btn_randomize.grid(row= 1, column= 1, padx= 0, pady= 5)
-
-btn_enter = tk.Button(fme_buttons, text= 'Submit', command= lambda: [get_info()])
-btn_enter.grid(row= 0, column= 1, padx=5, pady=20)
-def set_timer_durations():
-    """Sets the timer durations based on user input."""
-    global HIGH_INTENSITY_DURATION, LOW_INTENSITY_DURATION
-    boulder_time = get_boulderlength()
-    transition_time = int(spnbx_transtime.get())
-    HIGH_INTENSITY_DURATION = boulder_time  # seconds
-    LOW_INTENSITY_DURATION = transition_time  # seconds
 
 window.mainloop()
