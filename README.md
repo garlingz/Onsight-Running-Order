@@ -2,7 +2,7 @@
 RO_app is a python program which lets the user generate "run times" for climbing competitions, specifically on-sight bouldering competitions.
 
 ## Installation
-File hosted by Git-LFS and should be downloadable from GitHub or by GoogleDrive on request.
+Downloaded from the Releases section (Current Version 1.0.0) or by GoogleDrive on request.
 
 ## Usage
 ![new_window](new_window.PNG)
@@ -68,11 +68,11 @@ Resets the timer to the original values for both the climbing time and transitio
     * Have changable round length &#x2705;
     * Changable transition time (default 5 seconds) &#x2705;
     * Be able to insert break times inbetween categories &#x2705; (manually)
-    * <s>Autopopulate categories based on age groups</s>
-    * <s>Able to customize age groups, default to USAC </s>
+    * <s>Autopopulate categories based on age groups. </s> Removed because it wasn't necessary.
+    * <s>Able to customize age groups, default to USAC. </s> See above.
     * Change how many boulders in a round &#x2705;
     * Display start times for each competitor &#x2705;
-    * Display start time for each boulder per competitor
+    * Display start time for each boulder per competitor. 🙈
     * Toggle to show what time competitor needs to be sitting in chair (1 round before their climb) &#x2705;
     * Be able to randomize order of competitors &#x2705;
     * Columns for each climber:
@@ -83,6 +83,6 @@ Resets the timer to the original values for both the climbing time and transitio
 * Add functionality to run the TimerApp without using it for a climbing round timer (removed transition sounds).
 * Package program to include all dependencies (like the mp3 sound files)
 * Pick from a dropdown list which types of notification sounds to use for TimerApp audio.
-* Host new application on Git LFS. &#x2705;
+* <s>Host new application on Git LFS. </s> Moved to hosting on the Github Releases tab. &#x2705;
 * Match color scheme to what USA climbing uses. &#x2705;
 * Match sounds to what USA climbing uses. &#x2705;
