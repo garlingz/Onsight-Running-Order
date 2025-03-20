@@ -1,5 +1,5 @@
 # Running Order Application
-RO_app is a python program which lets the user generate "run times" for climbing competitions, specifically on-sight bouldering competitions.
+RO_app is a python program which lets the user generate "run times" for onsight climbing competitions.
 
 ## Installation
 Downloaded from the Releases section (Current Version 1.0.0) or by GoogleDrive on request.
@@ -17,7 +17,7 @@ The alloted climbing time of the round. USA Climbing default is 4 minutes, writt
 How many seconds will be given as a transition period, during this time nobody will be climbing. USA Climbing default is 15 seconds.
 
 ### Boulders in the Round
-How many boulders will each competitor go through in their round.
+How many boulders will each competitor go through in their round. 
 
 ### List of Competitors
 List out Competitor names seperated by a new line. Each competitor in the list will be assigned a chair time, a start time, and an end time.
