@@ -57,6 +57,56 @@ Pauses the timer at current time. The timer can be reset or resumed when in the 
 ### Reset
 Resets the timer to the original values for both the climbing time and transition time.
 
+# Scoring Application
+Scores is a scoring application to run alongside the RunningOrder application. Eventually its functionality will be added to the RunningOrder application. 
+Scores ranks climbers by their scores (Tops, Zones, Lowzones, attempts to each).
+
+## Installation
+Downloaded from the Releases section (Current Version 1.0.0) or by GoogleDrive on request.
+
+## Usage
+![score_mainpage](Scores/Score_mainpage.jpg)
+
+### Entry Fields
+
+#### Climber Name
+Name of the climber that the following scores will be associated with.
+
+#### Category
+Currently does nothing but can be entered.
+
+#### Tops 
+Tops are entered first as the total number of boulders where the Top was achieved, followed by the TOTAL attempts it took to achieve those tops. (Tops, attempts)
+
+#### Zones
+Zones are entered first as the total number of boulders where the Zone was achieved, followed by the TOTAL attempts it took to achieve those zones. (Zones, attempts)
+
+#### Low Zones
+Completely optional field, if nothing is entered the score is assumed as 0,0. Format follows that of Zones and Tops.
+
+### Buttons
+
+#### Add Climber
+Adds the climber and assoicated scores to the leaderboard. This will also update the standings in the leaderboard text field on the right.
+
+#### Edit Climber
+Changes information about a climber with an existing score. The names must match in the Climber Name field in order to update that climber. This will also update the standings in the leaderboard text field on the right.
+
+#### Remove Climber
+Removes information of a climber if they exist in the leaderboard.
+
+#### Clear Leaderboard
+Clears all information on all climbers in the leaderboard.
+
+#### Show Leaderboard
+Refreshes the Leaderboard, recalculates ranking.
+
+### Leaderboard
+![score_leaderboard.jpg](scores/Score_leaderboard.jpg)
+
+**NOTE:** The leaderboard text field can be selected to copy, but cannot directly be edited. Instead, use the entry field buttons to make any changes necessary.
+
+
 
 
 # **<u>Project Goals</u>**
