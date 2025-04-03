@@ -67,42 +67,39 @@ Downloaded from the Releases section (Current Version 1.0.0) or by GoogleDrive o
 ## Usage
 ![score_mainpage](Scores/Score_mainpage.jpg)
 
-### Entry Fields
-
-#### Climber Name
+### Climber Name
 Name of the climber that the following scores will be associated with.
 
-#### Category
+### Category
 Currently does nothing but can be entered.
 
-#### Tops 
+### Tops 
 Tops are entered first as the total number of boulders where the Top was achieved, followed by the TOTAL attempts it took to achieve those tops. (Tops, attempts)
 
-#### Zones
+### Zones
 Zones are entered first as the total number of boulders where the Zone was achieved, followed by the TOTAL attempts it took to achieve those zones. (Zones, attempts)
 
-#### Low Zones
+### Low Zones
 Completely optional field, if nothing is entered the score is assumed as 0,0. Format follows that of Zones and Tops.
 
-### Buttons
 
-#### Add Climber
+### Add Climber
 Adds the climber and assoicated scores to the leaderboard. This will also update the standings in the leaderboard text field on the right.
 
-#### Edit Climber
+### Edit Climber
 Changes information about a climber with an existing score. The names must match in the Climber Name field in order to update that climber. This will also update the standings in the leaderboard text field on the right.
 
-#### Remove Climber
+### Remove Climber
 Removes information of a climber if they exist in the leaderboard.
 
-#### Clear Leaderboard
+### Clear Leaderboard
 Clears all information on all climbers in the leaderboard.
 
-#### Show Leaderboard
+### Show Leaderboard
 Refreshes the Leaderboard, recalculates ranking.
 
 ### Leaderboard
-![score_leaderboard.jpg](scores/Score_leaderboard.jpg)
+![score_leaderboard.jpg](Scores/Score_leaderboard.jpg)
 
 **NOTE:** The leaderboard text field can be selected to copy, but cannot directly be edited. Instead, use the entry field buttons to make any changes necessary.
 
@@ -133,6 +130,7 @@ Refreshes the Leaderboard, recalculates ranking.
 * Add functionality to run the TimerApp without using it for a climbing round timer (removed transition sounds).
 * Package program to include all dependencies (like the mp3 sound files)
 * Pick from a dropdown list which types of notification sounds to use for TimerApp audio.
+* Add different scoring formats to the Scores application. (the 25/15/10/5 method)
 * <s>Host new application on Git LFS. </s> Moved to hosting on the Github Releases tab. &#x2705;
 * Match color scheme to what USA climbing uses. &#x2705;
 * Match sounds to what USA climbing uses. &#x2705;
