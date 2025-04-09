@@ -5,7 +5,7 @@ RO_app is a python program which lets the user generate "run times" for onsight 
 Downloaded from the Releases section (Current Version 1.0.0) or by GoogleDrive on request.
 
 ## Usage
-![new_window](new_window.PNG)
+![new_window](assets/new_secondwindow.PNG)
 
 ### Competition Start Time
 This box accepts military time in the HH:MM Time format. This time determines when the first climber will being climbing.
@@ -35,7 +35,7 @@ Using the information entered, the program will open a new window showing a **Ch
 Opens the **TimerApp** using **Time per Boulder** and **Transition Time**. This is a shortcut, but runs the same timer as the one found in the *Second Window*.
 
 
-![second_window](new_secondwindow.PNG)
+![second_window](assets/new_secondwindow.PNG)
 
 ### Copy to Clipboard
 Copies all text in the field to the clipboard.
@@ -46,7 +46,7 @@ Create a Comma Seperated Values file containing the information in the text fiel
 ### Create Timer
 **TimerApp**
 Opens a standalone timer based on user input from the first window.
-![timer_window](new_timerwindow.png)
+![timer_window](assets/new_timerwindow.png)
 
 ### Start/Resume
 Starts the timer or resumes the timer when paused.
@@ -65,7 +65,7 @@ Scores ranks climbers by their scores (Tops, Zones, Lowzones, attempts to each).
 Downloaded from the Releases section (Current Version 1.0.0) or by GoogleDrive on request.
 
 ## Usage
-![score_mainpage](Scores/Score_mainpage.jpg)
+![score_mainpage](assets/Score_mainpage.jpg)
 
 ### Climber Name
 Name of the climber that the following scores will be associated with.
@@ -99,7 +99,7 @@ Clears all information on all climbers in the leaderboard.
 Refreshes the Leaderboard, recalculates ranking.
 
 ### Leaderboard
-![score_leaderboard.jpg](Scores/Score_leaderboard.jpg)
+![score_leaderboard.jpg](assets/Score_leaderboard.jpg)
 
 **NOTE:** The leaderboard text field can be selected to copy, but cannot directly be edited. Instead, use the entry field buttons to make any changes necessary.
 
