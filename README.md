@@ -5,7 +5,7 @@ RO_app is a python program which lets the user generate "run times" for onsight 
 Downloaded from the Releases section (Current Version 1.0.0) or by GoogleDrive on request.
 
 ## Usage
-![new_window](assets/new_secondwindow.PNG)
+![new_window](assets/new_window.PNG)
 
 ### Competition Start Time
 This box accepts military time in the HH:MM Time format. This time determines when the first climber will being climbing.
