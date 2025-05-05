@@ -107,14 +107,14 @@ class ScoringUSAC(tk.Frame):
     class Leaderboard:
         def __init__(self):
             self.climbers = []
-            self.show_score_breakdown = False
+            self.toggle_score_breakdown = False
 
         def add_climber(self, climber):
             self.climbers.append(climber)
 
-        def show_score_breakdown(self):
+        def toggle_score_breakdown(self):
             """Toggles score breakdowns"""
-            self.show_score_breakdown = not self.show_score_breakdown
+            self.toggle_score_breakdown = not self.toggle_score_breakdown
 
         def rank_climbers(self):
             """Ranks climbers by the specified key"""
@@ -134,7 +134,7 @@ class ScoringUSAC(tk.Frame):
             result = []
             for climber in self.climbers:
                 breakdown = ""
-                if self.show_score_breakdown:
+                if self.toggle_score_breakdown:
                     # totals for each scoring type
                     total_tops = sum(boulder.top for boulder in climber.boulder_list)
                     total_zones = sum(boulder.zone for boulder in climber.boulder_list)
@@ -458,7 +458,7 @@ class ScoringUSAC(tk.Frame):
                
     def toggle_score_breakdown(self, show_breakdown):
         """Toggle on/off the score breakdown printing in the Leaderboard."""
-        self.leaderboard.show_score_breakdown = show_breakdown
+        self.leaderboard.toggle_score_breakdown = show_breakdown
         self.update_leaderboard()
 
     def enable_edits(self):
@@ -520,7 +520,7 @@ class ScoringOlympic(tk.Frame):
         """Leaderboard class that will visualize ranking of climbers based on their scores."""
         def __init__(self):
             self.climbers = []
-            self.show_score_breakdown = False #Default state
+            self.toggle_score_breakdown = False #Default state
 
         def add_climber(self, climber):
             """Adds a climber to the leaderboard."""
@@ -546,16 +546,16 @@ class ScoringOlympic(tk.Frame):
                     tie_count = 1
                 previous_score = current_score
 
-        def show_score_breakdown(self):
+        def toggle_score_breakdown(self):
             """Toggle score breakdown"""
-            self.show_score_breakdown = not self.show_score_breakdown
+            self.toggle_score_breakdown = not self.toggle_score_breakdown
 
         def __str__(self):
             """Generate a string representation of the leaderboard."""
             result = []
             for climber in self.climbers:
                 breakdown = ""
-                if self.show_score_breakdown:
+                if self.toggle_score_breakdown:
                     breakdown = ", ".join(
                         [f"B{i + 1}: {boulder.score:.1f}" for i, boulder in enumerate(climber.boulder_list)]
                     )
@@ -883,7 +883,7 @@ class ScoringOlympic(tk.Frame):
             messagebox.showinfo("Success", "Leaderboard has been cleared.")
 
     def toggle_score_breakdown(self, show_breakdown):
-        self.leaderboard.show_score_breakdown = show_breakdown
+        self.leaderboard.toggle_score_breakdown = show_breakdown
         self.update_leaderboard()
 
     def backbutton_popup(self, controller):
@@ -951,7 +951,7 @@ class ScoringIFSC25(tk.Frame):
         """Leaderboard class that will visualize ranking of climbers based on their scores."""
         def __init__(self):
             self.climbers = []
-            self.show_score_breakdown = False
+            self.toggle_score_breakdown = False
 
         def add_climber(self, climber):
             """Adds a climber to the leaderboard."""
@@ -977,15 +977,15 @@ class ScoringIFSC25(tk.Frame):
                     tie_count = 1
                 previous_score = current_score
 
-        def show_score_breakdown(self):
-            self.show_score_breakdown = not self.show_score_breakdown
+        def toggle_score_breakdown(self):
+            self.toggle_score_breakdown = not self.toggle_score_breakdown
 
         def __str__(self):
             """Generate a string representation of the leaderboard."""
             result = []
             for climber in self.climbers:
                 breakdown = ""
-                if self.show_score_breakdown:
+                if self.toggle_score_breakdown:
                     breakdown = ", ".join(
                         [f"B{i + 1}: {boulder.score:.1f}" for i, boulder in enumerate(climber.boulder_list)]
                     )
@@ -1310,7 +1310,7 @@ class ScoringIFSC25(tk.Frame):
             
     def toggle_score_breakdown(self, show_breakdown):
         """Toggle on/off the score breakdown printing in the Leaderboard."""
-        self.leaderboard.show_score_breakdown = show_breakdown
+        self.leaderboard.toggle_score_breakdown = show_breakdown
         self.update_leaderboard()
 
     def enable_edits(self):
