@@ -18,6 +18,13 @@ class App(tk.Tk):
 
     def show_frame(self, name):
         self.frames[name].tkraise()
+        titles = {
+            "StartingWindow": "Home",
+            "ScoringUSAC": "USAC Zone Style Scoring",
+            "ScoringOlympic": "Olympic Points Scoring",
+            "ScoringIFSC25": "IFSC 2025 Points Scoring"
+        }
+        self.title(titles.get(name, "Scoring App"))
 
 class StartingWindow(tk.Frame):
     """First window where the type of scoring is selected"""
