@@ -62,7 +62,7 @@ Scores is a scoring application to run alongside the RunningOrder application. E
 Scores ranks climbers by their scores (Tops, Zones, Lowzones, attempts to each).
 
 ## Installation
-Downloaded from the Releases section (Current Version 1.0.0) or by GoogleDrive on request.
+Downloaded from the Releases section (Current Version 1.1.0) or by GoogleDrive on request.
 
 ## Usage
 ![score_mainpage](assets/Score_mainpage.jpg)
