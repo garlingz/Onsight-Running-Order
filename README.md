@@ -67,8 +67,7 @@ Homepage for the Scores application. Select which scoring method you'd like to u
 * Zone style scoring where placements are determined by number of tops, zones, low zones, attempts to top, attempts to zone, and attempts to low zone in order of importance.
 
 #### Olympic Style
-![scores_olympic](assets/scores_olympic.jgp)
-**Olympic Scoring**
+![scores_olympic](assets/scores_olympic.jpg)
 * Points style scoring where three levels can be scored:
     * achieving a top (worth 25 points)
     * achieving a zone (worth 10 points)
@@ -76,8 +75,7 @@ Homepage for the Scores application. Select which scoring method you'd like to u
     * zero points awarded if the climber did not reach any scored level.
 
 #### IFSC Style
-![scores_ifsc](assets/scores_ifsc.jgp)
-**IFSC Scoring**
+![scores_ifsc](assets/scores_ifsc.jpg)
 * Points style scoring where two levels can be scored:
     * achieving a top (worth 25 points)
     * achieving a zone (worth 10 points)
