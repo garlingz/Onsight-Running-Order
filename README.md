@@ -28,7 +28,7 @@ Install each application from the GitHub Releases.
     * IFSC 2025 (Scored Levels: 25, 10)
  
 ## Tutorial
-A detailed tutorial is available in the [TUTORIAL.md]()
+A detailed tutorial is available in the [TUTORIAL.md](https://github.com/garlingz/Onsight-Running-Order/blob/main/TUTORIAL.md)
 
 ## License
 
