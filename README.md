@@ -24,7 +24,7 @@ Install each application from the GitHub Releases.
 - Cross platform
 - Scoring Methods: 
     * USA Climbing (Zone based scoring)
-    * Olympic (Scored Levels: 25, 10, and 5 levels)
+    * Olympic (Scored Levels: 25, 10, and 5)
     * IFSC 2025 (Scored Levels: 25, 10)
  
 ## Tutorial
