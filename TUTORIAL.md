@@ -40,7 +40,7 @@ Timer values will be carried over from the first page.
 * Transition time text is in $${\color{green}Green}$$.
 * When the transition time is up, a short lower beep followed by a longer higher beep signifies the start of the round.
 
-## RO_Scores
+# RO_Scores
 Homepage for the Scores application. Select which scoring method you'd like to use. 
 ![scores_homepage](assets/scores_homepage.jpg)
 
