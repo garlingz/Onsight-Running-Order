@@ -45,7 +45,6 @@ Homepage for the Scores application. Select which scoring method you'd like to u
 ![scores_homepage](assets/scores_homepage.jpg)
 
 
-*NOTE: Old USAC Style unavailable at the moment.*
 ### USAC Zone Style
 * Zone style scoring where placements are determined by number of tops, zones, low zones, attempts to top, attempts to zone, and attempts to low zone in order of importance.
 
